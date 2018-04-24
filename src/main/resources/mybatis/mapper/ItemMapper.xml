@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.x.ms.mapper.ItemMapper" >
+
+    <insert id="add_one_item" parameterType="Item">
+        insert into tbItem (num , `name` , `type` , brand , specification , `count` , price , reporter , location , shelf_life , production_date)
+        values ( #{num} , #{name} , #{type} , #{brand} , #{specification} , #{count} , #{price} , #{reporter} , #{location} , #{shelf_life} , #{production_date})
+    </insert>
+
+
+</mapper>
