@@ -2,10 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.x.ms.mapper.ItemMapper" >
 
+    <resultMap id="itemList" type="com.x.ms.domain.Item">
+        <id column="id" property="id"/>
+        <result column="num" property="num"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="brand" property="brand"/>
+        <result column="specification" property="specification"/>
+        <result column="count" property="count"/>
+        <result column="price" property="price"/>
+        <result column="reporter" property="reporter"/>
+        <result column="location" property="location"/>
+        <result column="shelf_life" property="shelf_life"/>
+        <result column="production_date" property="production_date"/>
+    </resultMap>
+
+    <sql id="base_column">num , `name` , `type` , brand , specification , `count` , price , reporter , location , shelf_life , production_date </sql>
+
     <insert id="add_one_item" parameterType="Item">
-        insert into tbItem (num , `name` , `type` , brand , specification , `count` , price , reporter , location , shelf_life , production_date)
+        insert into tbItem  (<include refid="base_column"/>)
+--         ( num , `name` , `type` , brand , specification , `count` , price , reporter , location , shelf_life , production_date)
         values ( #{num} , #{name} , #{type} , #{brand} , #{specification} , #{count} , #{price} , #{reporter} , #{location} , #{shelf_life} , #{production_date})
     </insert>
+
+    <!--<select id="find_all" resultMap="itemList">-->
+        <!--select <include refid="base_column"/> from  tbItem-->
+    <!--</select>-->
 
 
 </mapper>
