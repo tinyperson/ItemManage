@@ -6,8 +6,8 @@
     </select>
 
     <insert id="add_one_user" parameterType="User">
-        insert into tbUser (username , password)
-        values (#{username} , #{password})
+        insert into tbUser (jobNum , username , password)
+        values (#{jobNum} , #{username} , "123456")
     </insert>
 
 

@@ -20,6 +20,7 @@ public class UserService {
             return "密码错误";
         }
         else {
+            user.setUserSign(dbUser.getUserSign());
             return "登陆成功";
         }
     }

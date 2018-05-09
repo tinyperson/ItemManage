@@ -87,13 +87,13 @@
               <a href="#"><i class="glyphicon glyphicon-inbox fa-fw"></i>物品管理<span class="fa arrow"></span></a>
               <ul class="nav nav-second-level">
                 <li>
-                  <a href="admin_Wh_man.html">仓库管理</a>
+                  <a th:href="@{/admin_Wh_man}">仓库管理</a>
                 </li>
                 <li>
-                  <a th:href="admin_It_sto">物品入库</a>
+                  <a th:href="@{/admin_It_sto}">物品入库</a>
                 </li>
                 <li>
-                  <a th:href="admin_It_rec">物品记录</a>
+                  <a th:href="@{/admin_It_rec}">物品记录</a>
                 </li>
               </ul>
               <!-- /.nav-second-level -->
@@ -118,8 +118,8 @@
         <div class="row">
           <div class="col-lg-12">
             <!--<h1 class="page-header">管理员界面</h1>-->
-            <h1> <span th:text="${user_result}"></span></h1>
-            <h1> <span  th:text="${session.user}?'欢迎 ：'+${session.user.getUsername()}:'（您未登录）'" ></span> </h1>
+            <!--<h1> <span th:text="${user_result}"></span></h1>-->
+            <h1> <span  th:text="${session.user}?'欢迎，'+${session.user.getUsername()}:'（您未登录）'" ></span> </h1>
 
           </div>
           <!-- /.col-lg-12 -->

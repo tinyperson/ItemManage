@@ -31,6 +31,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
 </head>
 
 <body>
@@ -117,7 +118,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
-            <h1 class="page-header">管理员物品入库界面</h1>
+            <h1 class="page-header">管理员仓库管理界面</h1>
           </div>
           <!-- /.col-lg-12 -->
         </div>
@@ -132,68 +133,82 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-8">
-                                <form role="form" th:action="@{/admin_It_add}" th:object="${item}" th:method="post">
-
+                                <form role="form" th:action="@{/admin_It_change}" th:object="${item}" th:method="post">
+                                    <div class="form-group" hidden="hidden">
+                                        <label>ID</label>
+                                        <input class="form-control" name="id" id="id" placeholder="ID" th:value="${Item.getId()}">
+                                    </div>
                                     <div class="form-group">
                                         <label>申请单号</label>
-                                        <input class="form-control" name="num" id="num" placeholder="申请单号">
+                                        <input class="form-control" name="num" id="num" placeholder="申请单号" th:value="${Item.getNum()}">
                                     </div>
 
                                     <div class="form-group">
                                         <label>物品名称</label>
-                                        <input class="form-control" name="name" id="name" placeholder="物品名称">
+                                        <input class="form-control" name="name" id="name" placeholder="物品名称" th:value="${Item.getName()}">
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>物品类型</label>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="type" id="type1" value="低值" checked>低值
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="type" id="type2" value="易耗">易耗
-                                        </label>
-                                    </div>
+                                    <div th:switch="${Item.getType()}">
+                                        <div th:case="'低值'" class="form-group">
+                                            <label>物品类型</label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="type" id="type1" value="低值" checked >低值
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="type" id="type2" value="易耗" >易耗
+                                            </label>
+                                        </div>
 
+                                        <div th:case="'易耗'" class="form-group">
+                                            <label>物品类型</label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="type" id="type1" value="低值" >低值
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="type" id="type2" value="易耗" checked>易耗
+                                            </label>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label>物品品牌</label>
-                                        <input class="form-control" name="brand" id="brand" placeholder="物品品牌">
+                                        <input class="form-control" name="brand" id="brand" placeholder="物品品牌" th:value="${Item.getBrand()}">
                                     </div>
 
                                     <div class="form-group">
                                         <label>物品规格</label>
-                                        <textarea class="form-control" name="specification" id="specification" rows="3"></textarea>
+                                        <textarea class="form-control" name="specification" id="specification" rows="3" >[[${Item.getSpecification()}]]</textarea>
                                     </div>
 
                                     <div class="form-group">
                                         <label>物品数量</label>
-                                        <input class="form-control" name="count" id="count" placeholder="物品数量">
+                                        <input class="form-control" name="count" id="count" placeholder="物品数量" th:value="${Item.getCount()}">
                                     </div>
 
                                     <label>物品价格</label>
                                     <div class="form-group input-group">
                                         <span class="input-group-addon"><i class="fa fa-rmb"></i>
                                         </span>
-                                        <input type="text" class="form-control" name="price" id="price" placeholder="物品价格">
+                                        <input type="text" class="form-control" name="price" id="price" placeholder="物品价格" th:value="${Item.getPrice()}">
                                     </div>
 
                                     <div class="form-group">
                                         <label>申报人</label>
-                                        <input class="form-control" name="reporter" id="reporter" placeholder="申报人">
+                                        <input class="form-control" name="reporter" id="reporter" placeholder="申报人" th:value="${Item.getReporter()}">
                                     </div>
 
                                     <div class="form-group">
                                         <label>存放地点</label>
-                                        <input class="form-control" name="location" id="location" placeholder="存放地点">
+                                        <input class="form-control" name="location" id="location" placeholder="存放地点" th:value="${Item.getLocation()}">
                                     </div>
 
                                     <div class="form-group">
                                         <label>保质期</label>
-                                        <input class="form-control" name="shelf_life" id="shelf_life" placeholder="保质期">
+                                        <input class="form-control" name="shelf_life" id="shelf_life" placeholder="保质期" th:value="${Item.getShelf_life()}">
                                     </div>
 
                                     <div class="form-group">
                                         <label>生产日期</label>
-                                        <input class="form-control" type="date" name="production_date" id="production_date" placeholder="生产日期">
+                                        <input class="form-control" type="date" name="production_date" id="production_date" placeholder="生产日期" th:value="${Item.getProduction_date()}">
                                     </div>
 
 
@@ -207,8 +222,6 @@
                                 </form>
                             </div>
                             <!-- /.col-lg-6 (nested) -->
-
-                            <span th:text="${session.item}? ${session.item.getName()}+ ${item_result} "></span>
 
                         </div>
                         <!-- /.row (nested) -->

@@ -17,17 +17,37 @@
         <result column="production_date" property="production_date"/>
     </resultMap>
 
-    <sql id="base_column">num , `name` , `type` , brand , specification , `count` , price , reporter , location , shelf_life , production_date </sql>
+    <sql id="base_column">num , `name` , `type` , brand , specification , `count` , price , reporter , location , shelf_life , production_date , `in`  </sql>
+    <sql id="base_column_get">id , num , `name` , `type` , brand , specification , `count` , price , reporter , location , shelf_life , production_date , `in` , temp , out</sql>
 
     <insert id="add_one_item" parameterType="Item">
         insert into tbItem  (<include refid="base_column"/>)
---         ( num , `name` , `type` , brand , specification , `count` , price , reporter , location , shelf_life , production_date)
-        values ( #{num} , #{name} , #{type} , #{brand} , #{specification} , #{count} , #{price} , #{reporter} , #{location} , #{shelf_life} , #{production_date})
+--         ( num , `name` , `type` , brand , specification , `count` , price , reporter , location , shelf_life , production_date ,in)
+        values ( #{num} , #{name} , #{type} , #{brand} , #{specification} , #{count} , #{price} , #{reporter} , #{location} , #{shelf_life} , #{production_date} , #{count})
     </insert>
 
-    <!--<select id="find_all" resultMap="itemList">-->
-        <!--select <include refid="base_column"/> from  tbItem-->
-    <!--</select>-->
+    <select id="get_all" resultMap="itemList">
+        select <include refid="base_column_get"/> from  tbItem
+    </select>
 
+    <select id="get_One_by_id" parameterType="int" resultType="Item">
+        select * from tbItem where id = #{id}
+    </select>
+    
+    <update id="change_item_by_id" parameterType="Item">
+        update tbItem
+          set num = #{num},
+              `name` = #{name},
+              `type` = #{type},
+              brand = #{brand},
+              specification = #{specification},
+              `count` = #{count},
+              price = #{price},
+              reporter = #{reporter},
+              location = #{location},
+              shelf_life = #{shelf_life},
+              production_date = #{production_date}
+          where id = #{id}
+    </update>
 
 </mapper>

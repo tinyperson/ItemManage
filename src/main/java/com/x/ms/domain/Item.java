@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Date;
-import java.util.List;
 
 
 @Getter
@@ -22,4 +21,7 @@ public class Item {
     private String location;
     private String shelf_life;
     private Date production_date;
+    private int in;
+    private int temp;
+    private int out;
 }
