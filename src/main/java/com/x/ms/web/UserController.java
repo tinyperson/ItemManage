@@ -96,6 +96,13 @@ public class UserController {
 
     }
 
+    @RequestMapping(value = "/loginOut")
+    public void loginOut(HttpSession session,
+                         HttpServletResponse response) throws IOException {
+        session.removeAttribute("user");
+        response.sendRedirect("/");
+    }
+
     @GetMapping(value = "/admin_Us_add")
     public String admin_Us_add_Get(){
         return "admin_Us_add";
