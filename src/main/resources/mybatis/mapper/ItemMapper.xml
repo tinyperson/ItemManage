@@ -18,7 +18,7 @@
     </resultMap>
 
     <sql id="base_column">num , `name` , `type` , brand , specification , `count` , price , reporter , location , shelf_life , production_date , `in`  </sql>
-    <sql id="base_column_get">id , num , `name` , `type` , brand , specification , `count` , price , reporter , location , shelf_life , production_date , `in` , temp , out</sql>
+    <sql id="base_column_get">id , num , `name` , `type` , brand , specification , `count` , price , reporter , location , shelf_life , production_date , `in` , temp , `out` </sql>
 
     <insert id="add_one_item" parameterType="Item">
         insert into tbItem  (<include refid="base_column"/>)
