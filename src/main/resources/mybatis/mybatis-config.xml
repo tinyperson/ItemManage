@@ -6,6 +6,7 @@
     <typeAliases>
         <typeAlias alias="User" type="com.x.ms.domain.User" />
         <typeAlias alias="Item" type="com.x.ms.domain.Item" />
+        <typeAlias alias="Borrow" type="com.x.ms.domain.Borrow"/>
     </typeAliases>
 
 

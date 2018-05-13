@@ -167,7 +167,8 @@
                     <td th:text="${item.getProduction_date()}"></td>
                     <td>
                       <form th:action="@{/user_It_app_borrow}" th:method="post">
-                        <input th:name="change_id" th:value="${item.getId()}" type="hidden">
+                        <input th:name="count" id="count" placeholder="借用数量">
+                        <input th:name="borrow_id" th:value="${item.getId()}" type="hidden">
                         <input type="submit" class="btn btn-success btn-xs" th:value="申请">
                       </form>
                     </td>

@@ -1,8 +1,11 @@
 package com.x.ms.web;
 
 import com.github.pagehelper.PageInfo;
+import com.x.ms.domain.Borrow;
 import com.x.ms.domain.Item;
+import com.x.ms.domain.User;
 import com.x.ms.service.ItemService;
+import com.x.ms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.Response;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -24,6 +29,8 @@ public class ItemController {
 
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private UserService userService;
 
 //    @RequestMapping("/admin_It_rec")
 //    public String admin_It_rec(){
@@ -108,8 +115,40 @@ public class ItemController {
     }
 
     @PostMapping(value = "/user_It_app_borrow")
-    public void user_It_app_borrow_Post(){
+    public void user_It_app_borrow_Post(HttpServletRequest request,
+                                        HttpSession session,
+                                        HttpServletResponse response) throws IOException {
+        String Borrow_id = request.getParameter("borrow_id");
+        int count = Integer.parseInt(request.getParameter("count"));
+        Item item = itemService.get_One_by_id(Integer.parseInt(Borrow_id));
 
+        User tempUser = (User) session.getAttribute("user");
+        User user = userService.getOneUser(tempUser);
+//        Date now = new Date(new java.util.Date().getTime());
+//
+//
+//        Borrow borrow = null;
+//
+//        borrow.setUsername(user.getUsername());
+//        borrow.setJobNum(user.getJobNum());
+//        borrow.setItemId(item.getId());
+//        borrow.setItemNum(item.getNum());
+//        borrow.setItemName(item.getName());
+//        borrow.setCount(count);
+//        borrow.setState("申请中");
+//        borrow.setBorrowDate(now);
+
+        String borrowResult = itemService.borrow(item,user,count);
+
+        response.setContentType("text/html;charset=utf-8");
+        String location = "window.location='/user_It_app';";
+        PrintWriter out = response.getWriter();
+        out.write("<script>alert('"+borrowResult+"');" +
+                location +
+                "window.close()" +
+                "</script>");
+
+        out.close();
     }
 
 }

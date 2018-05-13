@@ -1,11 +1,11 @@
 package com.x.ms.domain;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 
-@Getter
-@Setter
+@Data
 public class User {
     private String jobNum;
     private int userId;

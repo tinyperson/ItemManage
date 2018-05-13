@@ -11,6 +11,11 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
+    public User getOneUser(User user) {
+        User dbUser = userMapper.get_one_user(user);
+        return  dbUser;
+    }
+
     public String login(User user){
         User dbUser = userMapper.get_one_user(user);
         if (dbUser == null){
