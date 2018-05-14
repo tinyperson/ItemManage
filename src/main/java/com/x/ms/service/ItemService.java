@@ -72,4 +72,8 @@ public class ItemService {
         List<Borrow>  borrowList = itemMapper.get_borrow_all();
         return borrowList;
     }
+
+    public void admin_borrow_decide(int borrow_id, String decision) {
+        itemMapper.change_state_by_id(decision,borrow_id);
+    }
 }

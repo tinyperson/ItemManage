@@ -21,4 +21,6 @@ public interface ItemMapper {
     void update_item_borrow(Item item);
 
     List<Borrow> get_borrow_all();
+
+    void change_state_by_id(String decision, int borrow_id);
 }

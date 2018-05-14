@@ -44,7 +44,7 @@
     </select>
 
     <select id="get_borrow_all" resultMap="borrowList">
-        select <include refid="borrow_column"/> from  tbBorrow
+        select borrowId , <include refid="borrow_column"/> from  tbBorrow
     </select>
 
     <select id="get_One_by_id" parameterType="int" resultType="Item">
@@ -77,6 +77,14 @@
           set `in` = #{in},
               temp = #{temp}
           where id = #{id}
+    </update>
+    <!--update tbBorrow-->
+    <!--set state = #{0}-->
+    <!--where borrowId = #{1}-->
+    <update id="change_state_by_id">
+        update tbBorrow
+          set state = #{arg0}
+          where borrowId = #{arg1}
     </update>
 
 </mapper>

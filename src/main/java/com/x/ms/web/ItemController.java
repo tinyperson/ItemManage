@@ -109,6 +109,25 @@ public class ItemController {
         return "admin_It_rec";
     }
 
+    @GetMapping(value = "/admin_It_rec_decide")
+    public String admin_It_rec_decide_Get(){
+        return "/admin_It_rec_decide";
+    }
+
+    @PostMapping(value = "/admin_It_rec_decide")
+    public void admin_It_rec_decide_Post(HttpServletRequest request,
+                                         HttpServletResponse response) throws IOException {
+        String Borrow_id = request.getParameter("decide_borrow_id");
+        String decision = null;
+        if (request.getParameter("同意") != null && request.getParameter("同意").equals("同意")){
+            decision = "已同意";
+        }else if (request.getParameter("拒绝") != null && request.getParameter("拒绝").equals("拒绝")){
+            decision = "已拒绝";
+        }
+        itemService.admin_borrow_decide(Integer.parseInt(Borrow_id),decision);
+        response.sendRedirect("/admin_It_rec");
+    }
+
     @RequestMapping("/user_It_app")
     public String user_show_item(Model model){
         List<Item> itemList = itemService.get_all();
