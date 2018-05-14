@@ -102,6 +102,13 @@ public class ItemController {
         return "admin_Wh_man";
     }
 
+    @RequestMapping("/admin_It_rec")
+    public String admin_show_borrow(Model model){
+        List<Borrow> borrowList = itemService.get_borrow_all();
+        model.addAttribute("borrowList",borrowList);
+        return "admin_It_rec";
+    }
+
     @RequestMapping("/user_It_app")
     public String user_show_item(Model model){
         List<Item> itemList = itemService.get_all();

@@ -67,4 +67,9 @@ public class ItemService {
 
         return "申请成功";
     }
+
+    public List<Borrow> get_borrow_all() {
+        List<Borrow>  borrowList = itemMapper.get_borrow_all();
+        return borrowList;
+    }
 }

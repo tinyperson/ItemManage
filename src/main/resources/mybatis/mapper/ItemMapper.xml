@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.x.ms.mapper.ItemMapper" >
 
+    <resultMap id="borrowList" type="com.x.ms.domain.Borrow">
+        <id column="borrowId" property="borrowId"/>
+        <result column="jobNum" property="jobNum"/>
+        <result column="username" property="username"/>
+        <result column="itemId" property="itemId"/>
+        <result column="itemNum" property="itemNum"/>
+        <result column="itemName" property="itemName"/>
+        <result column="count" property="count"/>
+        <result column="state" property="state"/>
+        <result column="borrowDate" property="borrowDate"/>
+    </resultMap>
+
     <resultMap id="itemList" type="com.x.ms.domain.Item">
         <id column="id" property="id"/>
         <result column="num" property="num"/>
@@ -29,6 +41,10 @@
 
     <select id="get_all" resultMap="itemList">
         select <include refid="base_column_get"/> from  tbItem
+    </select>
+
+    <select id="get_borrow_all" resultMap="borrowList">
+        select <include refid="borrow_column"/> from  tbBorrow
     </select>
 
     <select id="get_One_by_id" parameterType="int" resultType="Item">

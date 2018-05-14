@@ -19,4 +19,6 @@ public interface ItemMapper {
     void add_borrow_apply(Borrow borrow);
 
     void update_item_borrow(Item item);
+
+    List<Borrow> get_borrow_all();
 }
