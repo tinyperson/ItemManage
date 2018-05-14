@@ -162,10 +162,19 @@
                     <td th:text="${borrowItem.getJobNum()}"></td>
                     <td th:text="${borrowItem.getBorrowDate()}"></td>
                     <td>
-                      <form th:action="@{/admin_It_rec_decide}" th:method="post">
+                      <form th:if="${borrowItem.getState()} == '申请中'" th:action="@{/admin_It_rec_decide}" th:method="post">
                         <input th:name="decide_borrow_id" th:value="${borrowItem.getBorrowId()}" type="hidden">
+                        <input th:name="decide_borrow_count" th:value="${borrowItem.getCount()}" type="hidden">
+                        <input th:name="decide_borrow_itemId" th:value="${borrowItem.getItemId()}" type="hidden">
                         <input type="submit" class="btn btn-success btn-xs" th:name="确认" th:value="确认">
                         <input type="submit" class="btn btn-danger btn-xs" th:name="取消" th:value="取消">
+                      </form>
+                      <form th:unless="${borrowItem.getState()} == '申请中'" th:action="@{/admin_It_rec_decide}" th:method="post">
+                        <input th:name="decide_borrow_id" th:value="${borrowItem.getBorrowId()}" type="hidden">
+                        <input th:name="decide_borrow_count" th:value="${borrowItem.getCount()}" type="hidden">
+                        <input th:name="decide_borrow_itemId" th:value="${borrowItem.getItemId()}" type="hidden">
+                        <input type="submit" class="btn btn-success btn-xs disabled" th:name="确认" th:value="确认">
+                        <input type="submit" class="btn btn-danger btn-xs disabled" th:name="取消" th:value="取消">
                       </form>
                     </td>
                   </tr>
