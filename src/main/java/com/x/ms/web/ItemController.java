@@ -109,6 +109,28 @@ public class ItemController {
         return "admin_It_rec";
     }
 
+    @RequestMapping("/user_It_ret")
+    public String user_It_ret_show(Model model,
+                                   HttpSession session){
+        User tempUser = (User) session.getAttribute("user");
+        User user = userService.getOneUser(tempUser);
+
+        List<Borrow> borrowList = itemService.get_my_borrow_all(user.getJobNum());
+        model.addAttribute("borrowList",borrowList);
+        return "user_It_ret";
+    }
+
+    @RequestMapping("/user_It_rec")
+    public String user_It_rec_show(Model model,
+                                   HttpSession session){
+        User tempUser = (User) session.getAttribute("user");
+        User user = userService.getOneUser(tempUser);
+
+        List<Borrow> borrowList = itemService.get_my_borrow_all(user.getJobNum());
+        model.addAttribute("borrowList",borrowList);
+        return "user_It_rec";
+    }
+
     @GetMapping(value = "/admin_It_rec_decide")
     public String admin_It_rec_decide_Get(){
         return "/admin_It_rec_decide";
@@ -119,10 +141,10 @@ public class ItemController {
                                          HttpServletResponse response) throws IOException {
         String Borrow_id = request.getParameter("decide_borrow_id");
         String decision = null;
-        if (request.getParameter("同意") != null && request.getParameter("同意").equals("同意")){
-            decision = "已同意";
-        }else if (request.getParameter("拒绝") != null && request.getParameter("拒绝").equals("拒绝")){
-            decision = "已拒绝";
+        if (request.getParameter("确认") != null && request.getParameter("确认").equals("确认")){
+            decision = "已借出";
+        }else if (request.getParameter("取消") != null && request.getParameter("取消").equals("取消")){
+            decision = "已取消";
         }
         itemService.admin_borrow_decide(Integer.parseInt(Borrow_id),decision);
         response.sendRedirect("/admin_It_rec");

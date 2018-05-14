@@ -149,6 +149,7 @@
                     <th>申请人</th>
                     <th>工号</th>
                     <th>申请时间</th>
+                    <th>操作</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -163,8 +164,8 @@
                     <td>
                       <form th:action="@{/admin_It_rec_decide}" th:method="post">
                         <input th:name="decide_borrow_id" th:value="${borrowItem.getBorrowId()}" type="hidden">
-                        <input type="submit" class="btn btn-success btn-xs" th:name="同意" th:value="同意">
-                        <input type="submit" class="btn btn-danger btn-xs" th:name="拒绝" th:value="拒绝">
+                        <input type="submit" class="btn btn-success btn-xs" th:name="确认" th:value="确认">
+                        <input type="submit" class="btn btn-danger btn-xs" th:name="取消" th:value="取消">
                       </form>
                     </td>
                   </tr>

@@ -23,4 +23,7 @@ public interface ItemMapper {
     List<Borrow> get_borrow_all();
 
     void change_state_by_id(String decision, int borrow_id);
+
+    List<Borrow> get_all_by_jobNum(String jobNum);
+
 }

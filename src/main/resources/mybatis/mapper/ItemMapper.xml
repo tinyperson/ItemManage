@@ -47,6 +47,12 @@
         select borrowId , <include refid="borrow_column"/> from  tbBorrow
     </select>
 
+    <select id="get_all_by_jobNum" parameterType="string" resultMap="borrowList">
+        select borrowId , <include refid="borrow_column"/>
+        from  tbBorrow
+        where jobNum = #{jobNum}
+    </select>
+
     <select id="get_One_by_id" parameterType="int" resultType="Item">
         select * from tbItem where id = #{id}
     </select>
