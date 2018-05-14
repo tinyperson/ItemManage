@@ -81,7 +81,7 @@
     <update id="update_item_borrow" parameterType="Item">
         update tbItem
           set `in` = #{in},
-              temp = #{temp}
+              temp = temp + #{temp}
           where id = #{id}
     </update>
     <!--update tbBorrow-->
