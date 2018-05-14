@@ -73,8 +73,13 @@ public class ItemService {
         return borrowList;
     }
 
-    public void admin_borrow_decide(int borrow_id, String decision) {
+    public void admin_borrow_decide(int borrow_id, String decision, int borrow_count, int itemId) {
         itemMapper.change_state_by_id(decision,borrow_id);
+        if (decision.equals("已借出")){
+            itemMapper.lend_success(borrow_count ,itemId);
+        }else if (decision.equals("已取消")){
+            itemMapper.lend_failed(borrow_count , itemId);
+        }
     }
 
     public List<Borrow> get_my_borrow_all(String jobNum) {

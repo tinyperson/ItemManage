@@ -26,4 +26,7 @@ public interface ItemMapper {
 
     List<Borrow> get_all_by_jobNum(String jobNum);
 
+    void lend_success(int temp, int id);
+
+    void lend_failed(int temp, int id);
 }

@@ -92,5 +92,18 @@
           set state = #{arg0}
           where borrowId = #{arg1}
     </update>
+    
+    <update id="lend_success">
+        update tbItem
+          set temp = temp - #{arg0},
+               `out` = `out` + #{arg0}
+          where id = #{arg1}
+    </update>
 
+    <update id="lend_failed">
+        update tbItem
+          set temp = temp - #{arg0},
+               `in` = `in` + #{arg0}
+          where id = #{arg1}
+    </update>
 </mapper>

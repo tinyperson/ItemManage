@@ -140,13 +140,15 @@ public class ItemController {
     public void admin_It_rec_decide_Post(HttpServletRequest request,
                                          HttpServletResponse response) throws IOException {
         String Borrow_id = request.getParameter("decide_borrow_id");
+        int Borrow_count = Integer.parseInt(request.getParameter("decide_borrow_count"));
+        int itemId = Integer.parseInt(request.getParameter("decide_borrow_itemId"));
         String decision = null;
         if (request.getParameter("确认") != null && request.getParameter("确认").equals("确认")){
             decision = "已借出";
         }else if (request.getParameter("取消") != null && request.getParameter("取消").equals("取消")){
             decision = "已取消";
         }
-        itemService.admin_borrow_decide(Integer.parseInt(Borrow_id),decision);
+        itemService.admin_borrow_decide(Integer.parseInt(Borrow_id),decision , Borrow_count , itemId);
         response.sendRedirect("/admin_It_rec");
     }
 
