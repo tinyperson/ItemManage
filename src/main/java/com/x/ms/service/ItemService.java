@@ -86,4 +86,9 @@ public class ItemService {
         List<Borrow> borrowList = itemMapper.get_all_by_jobNum(jobNum);
         return borrowList;
     }
+
+    public void user_return_item(int borrow_id, String state, int borrow_count, int itemId) {
+        itemMapper.change_state_by_id(state , borrow_id);
+        itemMapper.user_item_return(borrow_count , itemId);
+    }
 }

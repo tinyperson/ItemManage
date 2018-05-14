@@ -139,7 +139,7 @@ public class ItemController {
     @PostMapping(value = "/admin_It_rec_decide")
     public void admin_It_rec_decide_Post(HttpServletRequest request,
                                          HttpServletResponse response) throws IOException {
-        String Borrow_id = request.getParameter("decide_borrow_id");
+        int Borrow_id = Integer.parseInt(request.getParameter("decide_borrow_id"));
         int Borrow_count = Integer.parseInt(request.getParameter("decide_borrow_count"));
         int itemId = Integer.parseInt(request.getParameter("decide_borrow_itemId"));
         String decision = null;
@@ -148,7 +148,7 @@ public class ItemController {
         }else if (request.getParameter("取消") != null && request.getParameter("取消").equals("取消")){
             decision = "已取消";
         }
-        itemService.admin_borrow_decide(Integer.parseInt(Borrow_id),decision , Borrow_count , itemId);
+        itemService.admin_borrow_decide(Borrow_id,decision , Borrow_count , itemId);
         response.sendRedirect("/admin_It_rec");
     }
 
@@ -201,4 +201,20 @@ public class ItemController {
         out.close();
     }
 
+    @GetMapping(value = "/user_It_ret_handle")
+    public String user_It_ret_handle_Get(){
+        return "user_It_ret_handle";
+    }
+
+    @PostMapping(value = "/user_It_ret_handle")
+    public void user_It_ret_handle_Post(HttpServletResponse response,
+                                        HttpServletRequest request) throws IOException {
+        int Borrow_id = Integer.parseInt(request.getParameter("decide_borrow_id"));
+        int Borrow_count = Integer.parseInt(request.getParameter("decide_borrow_count"));
+        int itemId = Integer.parseInt(request.getParameter("decide_borrow_itemId"));
+        String state = "已归还";
+        itemService.user_return_item(Borrow_id, state , Borrow_count , itemId);
+
+        response.sendRedirect("user_It_ret");
+    }
 }

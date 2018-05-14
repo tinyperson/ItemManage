@@ -143,7 +143,7 @@
                     <th>借用数量</th>
                     <th>物品状态</th>
                     <th>申请时间</th>
-                    <!--<th>操作</th>-->
+                    <th>操作</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -153,13 +153,20 @@
                     <td th:text="${borrowItem.getCount()}"></td>
                     <td th:text="${borrowItem.getState()}"></td>
                     <td th:text="${borrowItem.getBorrowDate()}"></td>
-                    <!--<td>-->
-                      <!--<form th:action="@{/admin_It_rec_decide}" th:method="post">-->
-                        <!--<input th:name="decide_borrow_id" th:value="${borrowItem.getBorrowId()}" type="hidden">-->
-                        <!--<input type="submit" class="btn btn-success btn-xs" th:name="同意" th:value="同意">-->
-                        <!--<input type="submit" class="btn btn-danger btn-xs" th:name="拒绝" th:value="拒绝">-->
-                      <!--</form>-->
-                    <!--</td>-->
+                    <td>
+                      <form th:if="${borrowItem.getState()} == '已归还' or ${borrowItem.getState()} == '已取消'" th:action="@{/user_It_ret_handle}" th:method="post">
+                        <input th:name="decide_borrow_id" th:value="${borrowItem.getBorrowId()}" type="hidden">
+                        <input th:name="decide_borrow_count" th:value="${borrowItem.getCount()}" type="hidden">
+                        <input th:name="decide_borrow_itemId" th:value="${borrowItem.getItemId()}" type="hidden">
+                        <input type="submit" class="btn btn-success btn-xs disabled" th:name="归还" th:value="归还">
+                      </form>
+                      <form th:if="${borrowItem.getState()} == '已借出'" th:action="@{/user_It_ret_handle}" th:method="post">
+                        <input th:name="decide_borrow_id" th:value="${borrowItem.getBorrowId()}" type="hidden">
+                        <input th:name="decide_borrow_count" th:value="${borrowItem.getCount()}" type="hidden">
+                        <input th:name="decide_borrow_itemId" th:value="${borrowItem.getItemId()}" type="hidden">
+                        <input type="submit" class="btn btn-success btn-xs" th:name="归还" th:value="归还">
+                      </form>
+                    </td>
                   </tr>
                   </tbody>
                 </table>

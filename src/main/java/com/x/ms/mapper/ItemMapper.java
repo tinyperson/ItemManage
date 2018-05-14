@@ -29,4 +29,6 @@ public interface ItemMapper {
     void lend_success(int temp, int id);
 
     void lend_failed(int temp, int id);
+
+    void user_item_return(int temp, int id);
 }
