@@ -69,7 +69,8 @@
               reporter = #{reporter},
               location = #{location},
               shelf_life = #{shelf_life},
-              production_date = #{production_date}
+              production_date = #{production_date},
+              `in` = #{count} - temp - `out`
           where id = #{id}
     </update>
 
