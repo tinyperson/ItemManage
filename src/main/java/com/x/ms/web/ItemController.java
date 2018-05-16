@@ -64,16 +64,24 @@ public class ItemController {
     }
 
     @PostMapping(value = "/admin_It_add")
-    public String admin_It_add_Post(Model model,
-                                    @ModelAttribute(value = "item")Item item,
-                                    HttpServletResponse response,
-                                    HttpSession session){
+    public void admin_It_add_Post(@ModelAttribute(value = "item")Item item,
+                                    HttpServletResponse response) throws IOException {
         String result = itemService.add(item) ;
         if (result.equals("成功插入")){
-            session.setAttribute("item",item);
+//            session.setAttribute("item",item);
+            String itemName = item.getName();
+            String location = "window.location='/admin_It_sto' ; ";
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.write("<script>alert('"+itemName+result+"');" +
+                    location +
+                    "window.close()" +
+                    "</script>");
+
+            out.close();
         }
-        model.addAttribute("item_result" , result);
-        return  response.encodeRedirectURL("/admin_It_sto");
+//        model.addAttribute("item_result" , result);
+//        return  response.encodeRedirectURL("/admin_It_sto");
     }
 
     @GetMapping(value = "/admin_It_change")
@@ -88,7 +96,19 @@ public class ItemController {
                                     HttpServletResponse response
                                     ) throws IOException {
         itemService.change_item_by_id(item);
-        response.sendRedirect("/admin_Wh_man");
+        String result = "修改成功";
+        String itemName = item.getName();
+        String location = "window.location='/admin_Wh_man' ; ";
+
+        response.setContentType("text/html;charset=utf-8");
+        PrintWriter out = response.getWriter();
+        out.write("<script>alert('"+itemName+result+"');" +
+                location +
+                "window.close()" +
+                "</script>");
+
+        out.close();
+//        response.sendRedirect("/admin_Wh_man");
 //                .encodeRedirectURL("/admin_Wh_man");
     }
 
