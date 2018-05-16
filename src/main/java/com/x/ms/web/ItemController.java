@@ -189,11 +189,18 @@ public class ItemController {
                                         HttpSession session,
                                         HttpServletResponse response) throws IOException {
         String Borrow_id = request.getParameter("borrow_id");
+        int item_in = Integer.parseInt(request.getParameter("item_in"));
         int count = Integer.parseInt(request.getParameter("count"));
         Item item = itemService.get_One_by_id(Integer.parseInt(Borrow_id));
 
-        User tempUser = (User) session.getAttribute("user");
-        User user = userService.getOneUser(tempUser);
+        response.setContentType("text/html;charset=utf-8");
+        PrintWriter out = response.getWriter();
+        String location = "window.location='/user_It_app';";
+        String borrowResult;
+
+        if ((0 < count) && (count <= item_in)){
+            User tempUser = (User) session.getAttribute("user");
+            User user = userService.getOneUser(tempUser);
 //        Date now = new Date(new java.util.Date().getTime());
 //
 //
@@ -208,16 +215,20 @@ public class ItemController {
 //        borrow.setState("申请中");
 //        borrow.setBorrowDate(now);
 
-        String borrowResult = itemService.borrow(item,user,count);
+            borrowResult = itemService.borrow(item,user,count);
 
-        response.setContentType("text/html;charset=utf-8");
-        String location = "window.location='/user_It_app';";
-        PrintWriter out = response.getWriter();
-        out.write("<script>alert('"+borrowResult+"');" +
-                location +
-                "window.close()" +
-                "</script>");
+            out.write("<script>alert('"+borrowResult+"');" +
+                    location +
+                    "window.close()" +
+                    "</script>");
 
+        }else{
+            borrowResult = "数量填写不正确";
+            out.write("<script>alert('"+borrowResult+"');" +
+                    location +
+                    "window.close()" +
+                    "</script>");
+        }
         out.close();
     }
 

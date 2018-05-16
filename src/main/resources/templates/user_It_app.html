@@ -168,6 +168,7 @@
                     <td>
                       <form th:action="@{/user_It_app_borrow}" th:method="post">
                         <input th:name="count" id="count" placeholder="借用数量">
+                        <input th:name="item_in" th:value="${item.getIn()}" type="hidden">
                         <input th:name="borrow_id" th:value="${item.getId()}" type="hidden">
                         <input type="submit" class="btn btn-success btn-xs" th:value="申请">
                       </form>
